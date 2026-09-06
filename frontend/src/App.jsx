@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8080'
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://topdev-app-prod.tail3d7213.ts.net:8080'
 
 async function api(path, options = {}) {
   const response = await fetch(`${API_BASE}${path}`, {
