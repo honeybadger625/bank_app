@@ -21,7 +21,7 @@ public class EventController {
     public ResponseEntity<?> ingest(@RequestBody Map<String, Object> event) {
         // Minimal insert into simulation_transactions created by Flyway
         try {
-            String sql = "INSERT INTO simulation_transactions(run_id, ts, account_id, event_type, amount, status, raw_json) VALUES (?, datetime('now'), ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO simulation_transactions(run_id, ts, account_id, event_type, amount, status, raw_json) VALUES (?, SYSDATETIME(), ?, ?, ?, ?, ?)";
             Object runId = event.getOrDefault("runId", "cli");
             Object accountId = event.getOrDefault("accountId", null);
             Object type = event.getOrDefault("type", "UNKNOWN");

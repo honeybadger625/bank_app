@@ -1,4 +1,5 @@
 
 backend/db/*.db
-backend/db/*.db
+.backups/
 backups/
+.env

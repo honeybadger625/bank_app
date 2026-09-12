@@ -3,9 +3,12 @@ services:
     build: ./backend
     ports:
       - "8080:8080"
-    volumes:
-      - ./backend/db:/app/db:Z
+    environment:
+      DB_URL: "${DB_URL}"
+      DB_USERNAME: "${DB_USERNAME}"
+      DB_PASSWORD: "${DB_PASSWORD}"
     restart: unless-stopped
+
   frontend:
     build: ./frontend
     ports:

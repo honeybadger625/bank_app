@@ -68,7 +68,7 @@ public class AccountsController {
     private void recordEvent(String id, String type, BigDecimal amount, Account before, String status, String reason) {
         Account after = bankService.getAccount(id).orElse(before);
         String raw = String.format("{\"accountId\":\"%s\",\"type\":\"%s\",\"amount\":%s}", id, type, amount.toPlainString());
-        jdbcTemplate.update("INSERT INTO simulation_transactions(run_id, ts, account_id, event_type, amount, status, raw_json) VALUES (?, datetime('now'), ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO simulation_transactions(run_id, ts, account_id, event_type, amount, status, raw_json) VALUES (?, SYSDATETIME(), ?, ?, ?, ?, ?)",
                 "manual", id, type, amount, status, raw);
     }
 }

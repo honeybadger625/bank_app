@@ -24,8 +24,8 @@ public class TransactionController {
             @RequestParam(defaultValue = "50") int limit) {
         int safeLimit = Math.max(1, Math.min(limit, 200));
         if (account == null || account.isBlank()) {
-            return jdbcTemplate.queryForList("SELECT id, run_id, ts, account_id, event_type, amount, status, raw_json FROM simulation_transactions ORDER BY id DESC LIMIT ?", safeLimit);
+            return jdbcTemplate.queryForList("SELECT TOP (?) id, run_id, ts, account_id, event_type, amount, status, raw_json FROM simulation_transactions ORDER BY id DESC", safeLimit);
         }
-        return jdbcTemplate.queryForList("SELECT id, run_id, ts, account_id, event_type, amount, status, raw_json FROM simulation_transactions WHERE account_id = ? ORDER BY id DESC LIMIT ?", account, safeLimit);
+        return jdbcTemplate.queryForList("SELECT TOP (?) id, run_id, ts, account_id, event_type, amount, status, raw_json FROM simulation_transactions WHERE account_id = ? ORDER BY id DESC", safeLimit, account);
     }
 }
